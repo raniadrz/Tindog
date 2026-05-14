@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { DogProfile } from "@/lib/neon";
@@ -93,6 +93,8 @@ function CardContent({ profile }: { profile: DogProfile }) {
 export default function SwipeDeck({ profiles, onLike, onDislike }: Props) {
   const [deck, setDeck] = useState(profiles);
 
+  useEffect(() => { setDeck(profiles); }, [profiles]);
+
   const handleLike = useCallback(() => {
     const top = deck[0];
     if (!top) return;
@@ -146,7 +148,7 @@ export default function SwipeDeck({ profiles, onLike, onDislike }: Props) {
         </button>
         <button
           onClick={handleLike}
-          className="w-18 h-18 rounded-full bg-gradient-to-br from-[#ec80ad] to-[#BA94D1] shadow-2xl flex items-center justify-center text-3xl hover:scale-110 active:scale-95 transition-all duration-150"
+          className="rounded-full bg-gradient-to-br from-[#ec80ad] to-[#BA94D1] shadow-2xl flex items-center justify-center text-3xl hover:scale-110 active:scale-95 transition-all duration-150"
           style={{ width: 72, height: 72 }}
           aria-label="Like"
         >

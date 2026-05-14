@@ -20,7 +20,11 @@ export default function ProfilePage() {
   const [signingOut, setSigningOut] = useState(false);
 
   useEffect(() => {
-    fetch("/api/profile").then((r) => r.json()).then((p) => { setProfile(p); setLoading(false); });
+    fetch("/api/profile")
+      .then((r) => r.json())
+      .then((p) => setProfile(p))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   async function handleSignOut() {

@@ -23,7 +23,10 @@ export default function SetupPage() {
     const f = e.target.files?.[0];
     if (!f) return;
     setFile(f);
-    setPreview(URL.createObjectURL(f));
+    setPreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return URL.createObjectURL(f);
+    });
   }
 
   async function handleSubmit(e: React.FormEvent) {
