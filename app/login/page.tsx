@@ -27,44 +27,51 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#ec80ad] to-[#BA94D1] p-4">
-      <div className="w-full max-w-md">
-        <h1 className="text-5xl font-[family-name:var(--font-pacifico)] text-white text-center mb-2">🐾 TinDog</h1>
-        <p className="text-white/90 text-center mb-8">Meet dogs nearby</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#ec80ad] via-[#d4a0d8] to-[#BA94D1] p-5">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-10">
+          <h1 className="text-6xl font-[family-name:var(--font-pacifico)] text-white drop-shadow-md">TinDog</h1>
+          <p className="text-white/80 mt-2 text-base font-medium tracking-wide">Find your dog&apos;s perfect match 🐾</p>
+        </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-8 space-y-4">
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">Welcome Back</h2>
+        <form onSubmit={handleSubmit} className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 space-y-4">
+          {error && (
+            <div className="text-red-500 text-sm bg-red-50 border border-red-100 px-4 py-3 rounded-2xl">
+              {error}
+            </div>
+          )}
 
-          {error && <p className="text-red-500 text-sm bg-red-50 p-3 rounded-lg">{error}</p>}
+          <div className="space-y-3">
+            <input
+              type="email"
+              placeholder="Email address"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3.5 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ec80ad]/40 focus:border-[#ec80ad] transition-all"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3.5 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ec80ad]/40 focus:border-[#ec80ad] transition-all"
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:border-[#ec80ad] bg-gray-50"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border-2 border-gray-100 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:border-[#ec80ad] bg-gray-50"
-          />
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#ec80ad] hover:bg-[#d96f9c] text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-60"
+            className="w-full bg-gradient-to-r from-[#ec80ad] to-[#BA94D1] text-white font-bold py-4 rounded-2xl shadow-lg hover:shadow-xl hover:opacity-95 active:scale-[0.98] transition-all duration-150 disabled:opacity-60 mt-2 tracking-wide"
           >
             {loading ? "Logging in…" : "Log In"}
           </button>
 
-          <p className="text-center text-gray-500 text-sm mt-4">
+          <p className="text-center text-gray-400 text-sm pt-1">
             New here?{" "}
-            <Link href="/register" className="text-[#ec80ad] font-bold hover:underline">
-              Sign up
+            <Link href="/register" className="text-[#ec80ad] font-semibold hover:underline">
+              Create account
             </Link>
           </p>
         </form>
