@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+:root {
+  --pink: #ec80ad;
+  --light-pink: #f3b9d1;
+  --purple: #BA94D1;
+  --deep-purple: #930ae9;
+  --dark: #1a1a1a;
+  --gray: #5f5f5f;
+  --light-gray: #f0f0f0;
+}
+
+@theme inline {
+  --color-pink: var(--pink);
+  --color-light-pink: var(--light-pink);
+  --color-purple: var(--purple);
+  --color-deep-purple: var(--deep-purple);
+}
+
+body {
+  background: var(--light-pink);
+  color: var(--dark);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
