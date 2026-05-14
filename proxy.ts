@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const PUBLIC = ["/login", "/register", "/api/session"];
 const AUTH_ONLY = ["/discover", "/matches", "/profile", "/chat", "/pricing", "/setup"];
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const session = req.cookies.get("__session")?.value;
 

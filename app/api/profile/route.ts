@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth-server";
-import { sql, initDB } from "@/lib/neon";
+import { sql, initDB, DogProfile } from "@/lib/neon";
 
 export async function GET() {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   await initDB();
-  const rows = await sql`SELECT * FROM users WHERE uid = ${session.uid}`;
+  const rows = (await sql`SELECT * FROM users WHERE uid = ${session.uid}`) as DogProfile[];
   return NextResponse.json(rows[0] ?? null);
 }
 
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       location  = EXCLUDED.location,
       owner_name = EXCLUDED.owner_name
   `;
-  const rows = await sql`SELECT * FROM users WHERE uid = ${session.uid}`;
+  const rows = (await sql`SELECT * FROM users WHERE uid = ${session.uid}`) as DogProfile[];
   return NextResponse.json(rows[0]);
 }
 

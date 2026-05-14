@@ -1,7 +1,12 @@
 import { neon } from "@neondatabase/serverless";
 
-// sql is a tagged template literal that runs queries against Neon Postgres
-export const sql = neon(process.env.DATABASE_URL!);
+let _sql: ReturnType<typeof neon> | null = null;
+function client() {
+  if (!_sql) _sql = neon(process.env.DATABASE_URL!);
+  return _sql;
+}
+export const sql = ((...args: Parameters<ReturnType<typeof neon>>) =>
+  client()(...args)) as ReturnType<typeof neon>;
 
 export type DogProfile = {
   uid: string;
